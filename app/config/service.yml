@@ -1,0 +1,23 @@
+core:
+  database: app\core\DataBase
+  session: app\core\Session
+  auth: app\core\middlewares\Auth
+
+service:
+  securityService: src\service\SecurityService
+  compteService: src\service\CompteService
+  transactionService: src\service\TransactionService
+  profilService: src\service\ProfilService
+  smsService: src\service\SmsService
+
+repository:
+  userRepository: src\repository\UtilisateurRepository
+  compteRepository: src\repository\CompteRepository
+  transactionRepository: src\repository\TransactionRepository
+  profilRepository: src\repository\ProfilRepository
+
+entity:
+  user: src\entity\User
+  compte: src\entity\Compte
+  transaction: src\repository\TransactionRepository
+  profil: src\entity\Profil

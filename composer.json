@@ -1,0 +1,31 @@
+{
+  "name": "abdallah/app-daf",
+  "description": "Application de la daf",
+  "autoload": {
+    "psr-4": {
+      "Abdallah\\AppDaf\\": "src/",
+      "app\\config\\": "app/config",
+      "app\\core\\": "app/core",
+      "app\\core\\abstract\\": "app/core/abstract",
+      "app\\core\\middlewares\\": "app/core/middlewares",
+      "src\\controller\\": "src/controller",
+      "src\\entity\\": "src/entity",
+      "src\\repository\\": "src/repository",
+      "src\\service\\": "src/service",
+      "src\\enums\\": "src/enums"
+    }
+  },
+  "authors": [
+    {
+      "name": "Abdoulaye Ly",
+      "email": "abdoulayely148@gmail.com"
+    }
+  ],
+  "require": {
+    "vlucas/phpdotenv": "^5.6"
+  },
+  "scripts": {
+    "database:migrate": "php migrations/Migration.php",
+    "database:seed": "php seeders/seeder.php"
+  }
+}
