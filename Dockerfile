@@ -1,29 +1,33 @@
-# Dockerfile
+FROM php:8.3-fpm
 
-FROM php:8.2-fpm
-
+# Installer nginx, supervisor et extensions PHP nécessaires
 RUN apt-get update && apt-get install -y \
-    libpq-dev \
-    unzip \
-    zip \
-    git \
     nginx \
     supervisor \
-    && docker-php-ext-install pdo pdo_pgsql
+    libpq-dev \
+    libzip-dev \
+    zip unzip \
+    git curl \
+    && docker-php-ext-install pdo pdo_pgsql pgsql
 
-COPY --from=composer:latest /usr/bin/composer /usr/bin/composer
+# Installer Composer
+COPY --from=composer:2 /usr/bin/composer /usr/bin/composer
 
-WORKDIR /var/www
+# Répertoire de travail
+WORKDIR /var/www/html
 
+# Copier l’application
 COPY . .
 
-# Copie la conf NGINX
-COPY ./docker/nginx/nginx.conf /etc/nginx/conf.d/default.conf
+# Installer les dépendances PHP
+RUN composer install --no-interaction --prefer-dist --optimize-autoloader || true
 
-# Copie la conf supervisor
-COPY ./docker/supervisord.conf /etc/supervisord.conf
+# Copier config nginx et supervisor
+COPY docker/nginx/nginx.conf /etc/nginx/sites-available/default
+COPY docker/supervisord.conf /etc/supervisord.conf
 
-RUN chmod -R 755 /var/www && chown -R www-data:www-data /var/www
+# Exposer le port HTTP
+EXPOSE 80
 
-
+# Lancer Supervisor (gère PHP-FPM + nginx)
 CMD ["/usr/bin/supervisord", "-c", "/etc/supervisord.conf"]
