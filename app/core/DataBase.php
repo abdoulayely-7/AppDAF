@@ -18,9 +18,10 @@ class DataBase extends Singleton
         $password = DB_PASSWORD;
 
         try {
-            $infoDB = "pgsql:host=$host;port=$port;dbname=$dbname;";
+            $dsn = "pgsql:host=$host;port=$port;dbname=$dbname";
+
             $this->connection = new PDO(
-                DSN,
+                $dsn,
                 $user,
                 $password,
                 [
