@@ -17,8 +17,6 @@ WORKDIR /var/www
 
 # Copier les fichiers de l’application
 COPY . /var/www
-
 # Donner les bons droits (si besoin)
 RUN chown -R www-data:www-data /var/www
-
 # EXPOSE 9000
