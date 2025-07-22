@@ -23,4 +23,7 @@ COPY ./docker/nginx/nginx.conf /etc/nginx/conf.d/default.conf
 # Copie la conf supervisor
 COPY ./docker/supervisord.conf /etc/supervisord.conf
 
+RUN chmod -R 755 /var/www && chown -R www-data:www-data /var/www
+
+
 CMD ["/usr/bin/supervisord", "-c", "/etc/supervisord.conf"]
