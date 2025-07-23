@@ -18,7 +18,9 @@ class DataBase extends Singleton
         $password = DB_PASSWORD;
 
         try {
-            $dsn = "pgsql:host=$host;port=$port;dbname=$dbname";
+            $driver = $_ENV['DB_CONNECTION'] ?? 'pgsql';
+            $dsn = "$driver:host=$host;port=$port;dbname=$dbname";
+
 
             $this->connection = new PDO(
                 $dsn,

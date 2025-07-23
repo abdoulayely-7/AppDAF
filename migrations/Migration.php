@@ -7,9 +7,15 @@ require_once __DIR__ . '/../vendor/autoload.php';
 $dotenv = Dotenv::createImmutable(dirname(__DIR__));
 $dotenv->load();
 
-$dsn = $_ENV['DSN'] ?? '';
 $user = $_ENV['DB_USER'] ?? '';
 $pass = $_ENV['DB_PASSWORD'] ?? '';
+$host = $_ENV['DB_HOST'] ?? '';
+$port = $_ENV['DB_PORT'] ?? '';
+$dbname = $_ENV['DB_NAME'] ?? '';
+$driver = $_ENV['DB_CONNECTION'] ?? 'pgsql';
+
+$dsn = "$driver:host=$host;port=$port;dbname=$dbname";
+
 
 $driver = '';
 if (stripos($dsn, 'pgsql:host') === 0) {
