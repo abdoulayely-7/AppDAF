@@ -21,7 +21,6 @@ class DataBase extends Singleton
             $driver = $_ENV['DB_CONNECTION'] ?? 'pgsql';
             $dsn = "$driver:host=$host;port=$port;dbname=$dbname";
 
-
             $this->connection = new PDO(
                 $dsn,
                 $user,

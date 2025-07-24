@@ -2,7 +2,7 @@
 
 namespace app\core;
 
-class Session
+class Session extends Singleton
 {
     private static  ?Session $instance = null;
 
@@ -13,13 +13,13 @@ class Session
         }
     }
 
-    public static function getInstance():Session
-    {
-        if(self::$instance===null){
-            self::$instance = new Session();
-        }
-        return self::$instance;
-    }
+    // public static function getInstance():Session
+    // {
+    //     if(self::$instance===null){
+    //         self::$instance = new Session();
+    //     }
+    //     return self::$instance;
+    // }
 
     public static function set($key, $data){
         $_SESSION[$key] = $data;
